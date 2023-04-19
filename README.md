@@ -117,15 +117,37 @@ echo -e "foo\n\n\ns\n" | opal-client
 
 Started opal_dragon client session.
 
-Enter a message: foo
+Enter a message:
 To verify, provide a public key, base64 encoded, otherwise leave empty and hit return (newline): 
 To verify, provide a signature, hex encoded, otherwise leave empty and hit return (newline): 
 Select an option, (s)ign or (v)erify: 
-opal_dragon: 'ee7dd54d-953a-49f9-aee7-4a1aeea271c3  ed25519::Signature(99D1556C1EDE325A7650B83EB2382EAB606FFC6655466116D0A2CDA63BDA66DD6D13A78EAD6D98D2E44063C219C3BFA322ADB5C3375377BEF08DF6B2965F6D00) "lbiSMmwkQVwRq0+7PrImIJAJsf2UM0uY1zJmZh9sXsA"'
+opal_dragon: 'ee7dd54d-953a-49f9-aee7-4a1aeea271c3 foo ed25519::Signature(99D1556C1EDE325A7650B83EB2382EAB606FFC6655466116D0A2CDA63BDA66DD6D13A78EAD6D98D2E44063C219C3BFA322ADB5C3375377BEF08DF6B2965F6D00) "lbiSMmwkQVwRq0+7PrImIJAJsf2UM0uY1zJmZh9sXsA"'
 
 ```
 
 The message in that above example is `foo` via that echo of `foon\n\ns\n`. 
+
+Here is an example of piping in a verification in the same manner:
+
+```
+t$ ime echo -e "foo\n26suMHg8MVdq+zbgctZJqVr8enJnHZ37ZreDbiJi+9M\n3C21A5E9ED94B02E84DDD684879B1C3C8A8F2DA8CE56837883E129C78C62AACACFDE8B5109AF224327CE87CBFE0F07738341595B6D0319766600A32AB66F3A08\nv\n" | opal-client
+
+Started opal_dragon client session.
+
+Enter a message: 
+To verify, provide a public key, base64 encoded, otherwise leave empty and hit return (newline): 
+To verify, provide a signature, hex encoded, otherwise leave empty and hit return (newline): 
+Select an option, (s)ign or (v)erify: 
+opal_dragon: '1d1dffef-66d0-4396-a70b-605334257fc7 true'
+
+
+real    0m0.008s
+user    0m0.005s
+sys     0m0.001s
+
+
+```
+
 
 The client uses localhost by default, but that can be a remote server, like a friend's or organization's instance of the microservice on the internet. The opal-dragon server can be used ephemerally, but can also be treated as a ledger of activity. The data dumps to STDOUT by default, which works well in an OCI container microservice, this is a cloud native design. Comment or remove the DEBUG lines to reduce server log size, or otherwise replace with your own logging needs.
 
