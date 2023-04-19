@@ -1,0 +1,21 @@
+syntax = "proto3";
+package opal;
+
+service Opal {
+    rpc Fire (OpalRequest) returns (OpalResponse);
+}
+
+message OpalRequest {
+  string inpoot = 1;
+  string publick = 3;
+  string signat = 4;
+  enum Fire {
+      SIGN = 0;
+      VERIFY = 1;
+  }
+  Fire fire = 2;    
+}
+
+message OpalResponse {
+    string confirmation = 1;
+}
