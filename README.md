@@ -106,7 +106,7 @@ opal_dragon: 'b876a5d1-13c0-42fe-a38b-bfbbf5526286 true'
 
 The private keys are used quickly and then thrown away after a signature generation: they are one-time use.
 
-The server generates a key pair and doesn't use it at all when a verification is processed. Removing that could be an optimization.
+The server generates a key pair and doesn't use it at all when a verification is processed. Removing that could be an optimization, but it is a low cost operation that helps keep the data "the same shape". This "shape" helps anonamize activity (if DEBUG is removed), so that each line is "the same" whether it was a sign or verify.
 
 Edit the source code to change the ports or target url/ips.  They are intentionally static after compiling for security. Set them in the code per use case and then compile to change them.
 
