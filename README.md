@@ -1,5 +1,7 @@
 ![cdlogo](https://carefuldata.com/images/cdlogo.png)
 
+Make a signature and a public key to verify it. Send the signature and data to the business parter or friend and the public key to a central location for all to access. We can treat this like a blockchain, or we can treat it however we want. Instead of the client being a CLI tool, the client could also be a server function as part of a set of microservices.
+
 # opal-dragon
 
 Opal-dragon aka opal, is a server (microservice) that communicates with gRPC to clients via mTLS and custom Opal RPC (the opal protobuf).
