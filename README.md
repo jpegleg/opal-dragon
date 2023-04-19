@@ -10,6 +10,12 @@ The current client is meant to be run by a person in an interactive way.
 
 The input message is either signed or verified. To verify, the public key and signature, as well as the original message, must be supplied.
 
+opal-dragon is made from ed25519_dalek and tonic gRPC:
+
+https://docs.rs/ed25519-dalek/latest/ed25519_dalek/
+
+https://docs.rs/tonic/latest/tonic/
+
 ## ephemeral one-time-use private keys
 
 The private keys for signing are generated on demand and never exposed or used again. The public key is logged and given out. 
