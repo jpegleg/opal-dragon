@@ -113,11 +113,11 @@ Edit the source code to change the ports or target url/ips.  They are intentiona
 The provided client can take piped data into the binary:
 
 ```
-echo -e "\nfoo\n\ns\n" | opal-client
+echo -e "foo\n\n\ns\n" | opal-client
 
 Started opal_dragon client session.
 
-Enter a message: 
+Enter a message: foo
 To verify, provide a public key, base64 encoded, otherwise leave empty and hit return (newline): 
 To verify, provide a signature, hex encoded, otherwise leave empty and hit return (newline): 
 Select an option, (s)ign or (v)erify: 
@@ -125,7 +125,7 @@ opal_dragon: 'ee7dd54d-953a-49f9-aee7-4a1aeea271c3  ed25519::Signature(99D1556C1
 
 ```
 
-The message in that above example is `foo` via that echo of `\nfoo\n\ns\n`. 
+The message in that above example is `foo` via that echo of `foon\n\ns\n`. 
 
 The client uses localhost by default, but that can be a remote server, like a friend's or organization's instance of the microservice on the internet. The opal-dragon server can be used ephemerally, but can also be treated as a ledger of activity. The data dumps to STDOUT by default, which works well in an OCI container microservice, this is a cloud native design. Comment or remove the DEBUG lines to reduce server log size, or otherwise replace with your own logging needs.
 
