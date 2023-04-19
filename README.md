@@ -98,7 +98,7 @@ opal_dragon: 'b876a5d1-13c0-42fe-a38b-bfbbf5526286 true'
 
 ```
 
-## defaults - local client, externally bound port 3042
+## defaults - local client, server externally bound port 3042
 
 The private keys are used quickly and then thrown away after a signature generation: they are one-time use.
 
