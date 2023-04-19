@@ -1,6 +1,6 @@
 ![cdlogo](https://carefuldata.com/images/cdlogo.png)
 
-Opal-dragon generates an ed25519 keypair, signs your message, throws away the private key, and gives back a UUID, signature, and public key. It will also verify a message and signature with a provided public key. Send the signature and data to the business parter or friend that is integrated with opal-dragon to automatically verify after pulling the public key from the trusted central server. We can treat this like a type of blockchain, or we can treat it however we want. But unlike a typical blockchain, any valid ed25519 signature can be verified, regardless of who signed it, if the Opal protocol is used and the person or software requesting the verification has a valid client certificate for access. And then all verifications and signatures are logged transactional events on the server, with linked data structures provided to the client. We can use opal-dragon this way on the fly, or baked into an ecosystem. Instead of the client being a CLI tool, the client could also be a server function as part of a set of microservices.
+Opal-dragon generates an ed25519 keypair, signs your message (terminated by newline character in the defaults), throws away the private key, and gives back a UUID, signature, and public key. It will also verify a message and signature with a provided public key. Send the signature and data to the business parter or friend that is integrated with opal-dragon to automatically verify after pulling the public key from the trusted central server. We can treat this like a type of blockchain component, or we can treat it however we want. But unlike a typical blockchain, with just opal-dragon any valid ed25519 signature can be verified, regardless of who signed it, if the Opal protocol is used and the person or software requesting the verification has a valid client certificate for access. And then all verifications and signatures are logged transactional events on the server, with linked data structures provided to the client. We can use opal-dragon this way on the fly, or baked into an ecosystem. The server and/or client can be be and/or running on user workstations or servers. Instead of the client being a CLI tool, the client could also be a server function as part of a set of microservices.
 
 The server is designed to easily be distributed, the server data can be collected by another service such as Kubernetes and consolidated. The UUIDv4 and time data makes the order of events in the pool not important, they can be effectively sorted by the UTC time data but also each event can be treated granularly and still be effective.
 
@@ -110,8 +110,34 @@ The server generates a key pair and doesn't use it at all when a verification is
 
 Edit the source code to change the ports or target url/ips.  They are intentionally static after compiling for security. Set them in the code per use case and then compile to change them.
 
+The provided client can take piped data into the binary:
+
+```
+echo -e "\nfoo\n\ns\n" | opal-client
+
+Started opal_dragon client session.
+
+Enter a message: 
+To verify, provide a public key, base64 encoded, otherwise leave empty and hit return (newline): 
+To verify, provide a signature, hex encoded, otherwise leave empty and hit return (newline): 
+Select an option, (s)ign or (v)erify: 
+opal_dragon: 'ee7dd54d-953a-49f9-aee7-4a1aeea271c3  ed25519::Signature(99D1556C1EDE325A7650B83EB2382EAB606FFC6655466116D0A2CDA63BDA66DD6D13A78EAD6D98D2E44063C219C3BFA322ADB5C3375377BEF08DF6B2965F6D00) "lbiSMmwkQVwRq0+7PrImIJAJsf2UM0uY1zJmZh9sXsA"'
+
+```
+
+The message in that above example is `foo` via that echo of `\nfoo\n\ns\n`. 
+
 The client uses localhost by default, but that can be a remote server, like a friend's or organization's instance of the microservice on the internet. The opal-dragon server can be used ephemerally, but can also be treated as a ledger of activity. The data dumps to STDOUT by default, which works well in an OCI container microservice, this is a cloud native design. Comment or remove the DEBUG lines to reduce server log size, or otherwise replace with your own logging needs.
 
 The server (gRPC microservice) only accepts the custom Opal gRPC spec and only authenticated via the client signed certificate. 
 
 The mTLS keys and certs are files in $pwd by default for both client and server. The client might be coded to a fixed path in /etc instead.
+
+
+Another note: the default DEBUG messages do log the message body as bytes during verification. The DEBUG logging is only on verifications by default, dumping each variable in the verification process to STDOUT with a linked uuid. 
+
+### Why call it opal protocol?
+
+Opals are mineraloids, aka stones that contain water. The more water they contain the harder they are.
+Opal gem stones have been seen as valuable and to have protective magic. In opal-dragon, it isn't magic, its math, but it is protective in terms of mTLS with rustls and providing a message authenticity service component. 
+
