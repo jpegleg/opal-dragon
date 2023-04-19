@@ -45,7 +45,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let w = w.trim();
     println!("Select an option, (s)ign or (v)erify: ");
     stdin().read_line(&mut fire).unwrap();
-    let v = match fire.trim().to_lowercase().chars().next().unwrap()           {
+    let v = match fire.trim().to_lowercase().chars().next().unwrap()
+        {
           's' => 0,
           'v' => 1,
           _ => 2,
