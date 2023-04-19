@@ -1,0 +1,26 @@
+[package]
+name = "opal_dragon"
+version = "0.1.0"
+edition = "2021"
+
+[[ bin ]] 
+name = "server"
+path = "src/server.rs"
+
+[[ bin ]]
+name = "client"
+path = "src/client.rs"
+
+[dependencies]
+tokio = { version = "1.27", features = ["macros", "rt-multi-thread"] }
+tonic = { version = "0.7.2", features = ["tls"] }
+prost = "0.10.4"
+ed25519-dalek = "1.0.1"
+rand = "0.7"
+uuid = { version = "0.4", features = ["serde", "v4"] }
+chrono = "0.4"
+base64 = "0.21.0"
+hex = "0.4.3"
+
+[build-dependencies]
+tonic-build = "0.7.2"
