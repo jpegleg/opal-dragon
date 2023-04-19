@@ -113,7 +113,7 @@ Edit the source code to change the ports or target url/ips.  They are intentiona
 The provided client can take piped data into the binary:
 
 ```
-echo -e "foo\n\n\ns\n" | opal-client
+$ echo -e "foo\n\n\ns\n" | opal-client
 
 Started opal_dragon client session.
 
@@ -127,10 +127,10 @@ opal_dragon: 'ee7dd54d-953a-49f9-aee7-4a1aeea271c3 foo ed25519::Signature(99D155
 
 The message in that above example is `foo` via that echo of `foon\n\ns\n`. 
 
-Here is an example of piping in a verification in the same manner:
+Here is an example of piping in a verification in the same manner, adding the linux `time` command to the front to measure the duration as well:
 
 ```
-t$ ime echo -e "foo\n26suMHg8MVdq+zbgctZJqVr8enJnHZ37ZreDbiJi+9M\n3C21A5E9ED94B02E84DDD684879B1C3C8A8F2DA8CE56837883E129C78C62AACACFDE8B5109AF224327CE87CBFE0F07738341595B6D0319766600A32AB66F3A08\nv\n" | opal-client
+$ time echo -e "foo\n26suMHg8MVdq+zbgctZJqVr8enJnHZ37ZreDbiJi+9M\n3C21A5E9ED94B02E84DDD684879B1C3C8A8F2DA8CE56837883E129C78C62AACACFDE8B5109AF224327CE87CBFE0F07738341595B6D0319766600A32AB66F3A08\nv\n" | opal-client
 
 Started opal_dragon client session.
 
