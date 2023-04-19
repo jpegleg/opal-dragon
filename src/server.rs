@@ -41,9 +41,9 @@ impl Opal for OpalService {
         let readn: DateTime<Utc> = Utc::now();
         println!("{} {} opal_dragon - DEBUG message: {:?}", &readn, &txid, &message);
         let upubkey = base64::engine::general_purpose::STANDARD_NO_PAD.decode(r.publick).unwrap();
-        println!("{} {} opal_dragon - DEBUG public key: {:?}", &readn, &txid, &upubkey);
+        println!("{} {} opal_dragon - DEBUG public key bytes: {:?}", &readn, &txid, &upubkey);
         let pubkey = PublicKey::from_bytes(&upubkey).unwrap();
-        println!("{} {} opal_dragon - DEBUG public key bytes: {:?}", &readn, &txid, &pubkey);
+        println!("{} {} opal_dragon - DEBUG public key: {:?}", &readn, &txid, &pubkey);
         let sigproc = r.signat.as_bytes();
         println!("{} {} opal_dragon - DEBUG signature bytes: {:?}", &readn, &txid, &sigproc);
         let dehexsign = hex::decode(sigproc).unwrap();
