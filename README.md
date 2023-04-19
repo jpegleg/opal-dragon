@@ -1,6 +1,8 @@
 ![cdlogo](https://carefuldata.com/images/cdlogo.png)
 
-Make a signature and a public key to verify it. Send the signature and data to the business parter or friend and the public key to a central location for all to access. We can treat this like a blockchain, or we can treat it however we want. Instead of the client being a CLI tool, the client could also be a server function as part of a set of microservices.
+Make a signature and a public key to verify it. Send the signature and data to the business parter or friend and the public key to a central location for all to access. We can treat this like a type of blockchain, or we can treat it however we want. On the fly, or baked into an ecosystem. Instead of the client being a CLI tool, the client could also be a server function as part of a set of microservices.
+
+The server is designed to easily be distributed, the server data can be collected by another service such as Kubernetes and consolidated. The UUIDv4 and time data makes the order of events in the pool not important, each event can be treated granularly and still be effective.
 
 # opal-dragon
 
