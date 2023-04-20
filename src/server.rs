@@ -27,10 +27,12 @@ impl Opal for OpalService {
     let pub64 = base64::engine::general_purpose::STANDARD_NO_PAD.encode(public_key_bytes);
     let txid = Uuid::new_v4().to_string();
     let readi: DateTime<Utc> = Utc::now();
-    println!("{} {} opal_dragon - Public key used: {:?}", &readi, &txid, &pub64);
-
+    println!("{} {} opal_dragon - INFO public key: {:?}", &readi, &txid, &pub64);
     let r = request.into_inner();
     match r.fire {
+      2 => Ok(Response::new(opal::OpalResponse { confirmation: { 
+        format!("{} OK", txid)
+      }})),
       0 => Ok(Response::new(opal::OpalResponse { confirmation: { 
         let message: &[u8] = r.inpoot.as_bytes();
         let signature: Signature = keypair.sign(message);
@@ -41,11 +43,9 @@ impl Opal for OpalService {
         let readn: DateTime<Utc> = Utc::now();
         println!("{} {} opal_dragon - DEBUG message: {:?}", &readn, &txid, &message);
         let upubkey = base64::engine::general_purpose::STANDARD_NO_PAD.decode(r.publick).unwrap();
-        println!("{} {} opal_dragon - DEBUG public key bytes: {:?}", &readn, &txid, &upubkey);
         let pubkey = PublicKey::from_bytes(&upubkey).unwrap();
         println!("{} {} opal_dragon - DEBUG public key: {:?}", &readn, &txid, &pubkey);
         let sigproc = r.signat.as_bytes();
-        println!("{} {} opal_dragon - DEBUG signature bytes: {:?}", &readn, &txid, &sigproc);
         let dehexsign = hex::decode(sigproc).unwrap();
         let esigna: Signature = Signature::from_bytes(&dehexsign).unwrap();
         println!("{} {} opal_dragon - DEBUG signature: {:?}", &readn, &txid, &esigna);
