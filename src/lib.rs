@@ -17,11 +17,27 @@ mod tests {
 
     #[test]
     fn base64test() {
+      use base64::{Engine as _};
       extern crate base64;
       let orig = b"Wowza mihno!";
-      let encoded: String = base64::encode(orig);
+      let encoded: String = base64::engine::general_purpose::STANDARD_NO_PAD.encode(orig);
       assert_eq!("V293emEgbWlobm8h", encoded);
-      assert_eq!(orig.as_slice(), &base64::decode(encoded).unwrap());
+      assert_eq!(orig.as_slice(), &base64::engine::general_purpose::STANDARD_NO_PAD.decode(encoded).unwrap());
     }
+
+    #[test]
+    fn genkeytest() {
+      use rand::rngs::OsRng;
+      use ed25519_dalek::{Keypair, PUBLIC_KEY_LENGTH};
+      extern crate rand;
+      extern crate ed25519_dalek;
+      let mut csprng = OsRng{};
+      let keypair: Keypair = Keypair::generate(&mut csprng);
+      let public_key_bytes: [u8; PUBLIC_KEY_LENGTH] = keypair.public.to_bytes(); 
+      let mut csprng2 = OsRng{};
+      let keypair2: Keypair = Keypair::generate(&mut csprng2);
+      let public_key_bytes2: [u8; PUBLIC_KEY_LENGTH] = keypair2.public.to_bytes(); 
+      assert_ne!(public_key_bytes, public_key_bytes2);
+   }
 
 }
