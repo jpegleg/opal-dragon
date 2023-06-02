@@ -40,4 +40,19 @@ mod tests {
       assert_ne!(public_key_bytes, public_key_bytes2);
    }
 
+    #[test]
+    fn dalektest() {
+      extern crate ed25519_dalek;
+      extern crate rand;
+      use rand::rngs::OsRng;
+      use ed25519_dalek::{Keypair, Signature, Signer};
+      let mut csprng = OsRng{};
+      let keypair: Keypair = Keypair::generate(&mut csprng);
+      let message: &[u8] = b"This is a test.";
+      let signature: Signature = keypair.sign(message);
+      assert!(keypair.verify(message, &signature).is_ok());
+  }
+
+}
+
 }
