@@ -51,6 +51,6 @@ mod tests {
       let message: &[u8] = b"This is a test.";
       let signature: Signature = keypair.sign(message);
       assert!(keypair.verify(message, &signature).is_ok());
-  }
+   }
 
 }
